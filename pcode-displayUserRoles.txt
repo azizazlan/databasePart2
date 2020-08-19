@@ -1,0 +1,36 @@
+1. Define a route:
+   Route::get('user-roles', 'UsersController@index');
+
+2. Make the controller:
+   php artisan make:controller UserController
+
+3. Add the function in the corresponding controller:
+   class UsersCOntroller extends Controller
+{
+
+   public function index()
+   {
+       // TODO???
+       $users = \App\User::all();
+       dd($users[0]->roles());
+       //return view('user.index', compact('users'));
+   }
+
+}
+
+4. Create the blade file. Where?
+   Create a directory under the views. ie. resources/views/user/index.blade.php
+
+   Get all the roles from the table. ie roles
+   $userWithRoles = [
+               { 'name' : 'Azlan', 'roles': [ {'name' : 'updateProgram'}, {'name' : 'deleteProgram'} ] },
+   ];
+
+   @foreach($usersWithRoles as $user)
+       {{ $user->name }} 
+       
+       @foreach($user->roles as $role)
+            {{ $role->name }}
+       @endforeach
+
+   @endforeach
